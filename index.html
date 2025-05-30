@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formato de Envíos - Uñas de la Monse Productos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ff6b9d, #c44569);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+            animation: slideUp 0.8s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .header {
+            background: linear-gradient(45deg, #ff6b9d, #ff8a80);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255,255,255,0.1) 10px,
+                rgba(255,255,255,0.1) 20px
+            );
+            animation: move 20s linear infinite;
+        }
+        
+        @keyframes move {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
+        .header h1 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            position: relative;
+            z-index: 1;
+            opacity: 0.9;
+        }
+        
+        .integration-selector {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .integration-selector h3 {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .integration-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .integration-option {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .integration-option:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+        
+        .integration-option.selected {
+            border-color: #fff;
+            background: rgba(255,255,255,0.3);
+        }
+        
+        .config-section {
+            background: #f8f9fa;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 15px;
+            display: none;
+        }
+        
+        .config-section.active {
+            display: block;
+        }
+        
+        .info-box {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .info-box h3 {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .info-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .info-box li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .info-box li:last-child {
+            border-bottom: none;
+        }
+        
+        .form-container {
+            padding: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+        
+        .form-group:nth-child(1) { animation-delay: 0.1s; }
+        .form-group:nth-child(2) { animation-delay: 0.2s; }
+        .form-group:nth-child(3) { animation-delay: 0.3s; }
+        .form-group:nth-child(4) { animation-delay: 0.4s; }
+        .form-group:nth-child(5) { animation-delay: 0.5s; }
+        .form-group:nth-child(6) { animation-delay: 0.6s; }
+        .form-group:nth-child(7) { animation-delay: 0.7s; }
+        .form-group:nth-child(8) { animation-delay: 0.8s; }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #333;
+            font-size: 1.1em;
+        }
+        
+        input, textarea, select {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e1e8ed;
+            border-radius: 10px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            background: linear-gradient(145deg, #f8f9fa, #ffffff);
+        }
+        
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #ff6b9d;
+            box-shadow: 0 0 0 3px rgba(255, 107, 157, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .file-input-wrapper {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+        
+        .file-input {
+            opacity: 0;
+            position: absolute;
+            z-index: -1;
+        }
+        
+        .file-input-label {
+            display: block;
+            padding: 15px;
+            background: linear-gradient(135deg, #ff6b9d, #ff8a80);
+            color: white;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+        
+        .file-input-label:hover {
+            background: linear-gradient(135deg, #e55a87, #ff6b9d);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 107, 157, 0.3);
+        }
+        
+        .required {
+            color: #ff6b9d;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .submit-btn:hover {
+            background: linear-gradient(135deg, #5a67d8, #6b5b95);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
+        }
+        
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .success-message, .error-message {
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+        }
+        
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            font-style: italic;
+        }
+        
+        .code-example {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            margin-top: 10px;
+            overflow-x: auto;
+        }
+        
+        .copy-btn {
+            background: #4a5568;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8em;
+            margin-top: 10px;
+        }
+        
+        .copy-btn:hover {
+            background: #2d3748;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 15px;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .form-container {
+                padding: 20px;
+            }
+            
+            .integration-options {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>💅 Uñas de la Monse Productos</h1>
+            <p>Formulario Dinámico de Envío</p>
+        </div>
+        
+        <div class="integration-selector">
+            <h3><span>⚡</span> Elige tu Método de Integración</h3>
+            <div class="integration-options">
+                <div class="integration-option" data-method="whatsapp">
+                    <div>📱</div>
+                    <div>WhatsApp</div>
+                </div>
+                <div class="integration-option" data-method="email">
+                    <div>📧</div>
+                    <div>Email</div>
+                </div>
+                <div class="integration-option" data-method="googleforms">
+                    <div>📝</div>
+                    <div>Google Forms</div>
+                </div>
+                <div class="integration-option" data-method="telegram">
+                    <div>💬</div>
+                    <div>Telegram</div>
+                </div>
+            </div>
+            <p style="font-size: 0.9em; opacity: 0.8;">Selecciona cómo quieres recibir los datos del formulario</p>
+        </div>
+
+        <!-- Configuración WhatsApp -->
+        <div class="config-section" id="whatsapp-config">
+            <h4>📱 Configuración WhatsApp</h4>
+            <p>Los datos se enviarán directamente a tu WhatsApp como mensaje estructurado.</p>
+            <div class="form-group">
+                <label for="whatsapp-number">Tu número de WhatsApp (con código de país)</label>
+                <input type="tel" id="whatsapp-number" placeholder="Ejemplo: +593987654321">
+            </div>
+            <div class="code-example">
+Ejemplo de mensaje que recibirás:
+🆕 Nueva solicitud de envío - Uñas de la Monse
+
+👤 Cliente: María García
+📱 Teléfono: 0987654321
+🆔 Cédula: 1234567890
+📍 Dirección: Av. Principal #123, Quito
+🛍️ Producto: Esmalte rojo mate, cantidad: 2
+
+📸 Foto adjunta en el chat
+            </div>
+        </div>
+
+        <!-- Configuración Email -->
+        <div class="config-section" id="email-config">
+            <h4>📧 Configuración Email</h4>
+            <p>Usa un servicio como EmailJS para recibir emails automáticamente sin servidor.</p>
+            <div class="form-group">
+                <label for="email-service">Tu email para recibir pedidos</label>
+                <input type="email" id="email-service" placeholder="pedidos@unasdelamonse.com">
+            </div>
+            <div class="code-example">
+Para configurar EmailJS:
+1. Registrate en emailjs.com (GRATIS)
+2. Crea un servicio de email 
+3. Configura tu plantilla
+4. Obtén tu Service ID y Template ID
+5. Pégalos en el código JavaScript
+            </div>
+            <button class="copy-btn" onclick="copyEmailCode()">Copiar código de configuración</button>
+        </div>
+
+        <!-- Configuración Google Forms -->
+        <div class="config-section" id="googleforms-config">
+            <h4>📝 Configuración Google Forms</h4>
+            <p>Conecta con Google Forms para almacenar automáticamente en Google Sheets.</p>
+            <div class="form-group">
+                <label for="forms-url">URL de tu Google Form</label>
+                <input type="url" id="forms-url" placeholder="https://forms.gle/tu-formulario">
+            </div>
+            <div class="code-example">
+Pasos para configurar:
+1. Crea un Google Form con los mismos campos
+2. Ve a "Respuestas" → "Crear hoja de cálculo"
+3. Copia la URL del formulario
+4. Los datos se guardarán automáticamente en Sheets
+            </div>
+        </div>
+
+        <!-- Configuración Telegram -->
+        <div class="config-section" id="telegram-config">
+            <h4>💬 Configuración Telegram</h4>
+            <p>Recibe notificaciones instantáneas en tu Telegram Bot.</p>
+            <div class="form-group">
+                <label for="telegram-token">Bot Token de Telegram</label>
+                <input type="text" id="telegram-token" placeholder="123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11">
+            </div>
+            <div class="form-group">
+                <label for="telegram-chat">Tu Chat ID</label>
+                <input type="text" id="telegram-chat" placeholder="123456789">
+            </div>
+            <div class="code-example">
+Para crear tu bot:
+1. Habla con @BotFather en Telegram
+2. Usa /newbot y sigue las instrucciones
+3. Obtén tu token del bot
+4. Usa @userinfobot para conocer tu Chat ID
+            </div>
+        </div>
+        
+        <div class="info-box">
+            <h3><span>📦</span> Información Importante de Envío</h3>
+            <ul>
+                <li><span>⏱️</span> Los envíos se realizan al día siguiente del pago total</li>
+                <li><span>🚚</span> Envíos únicamente por Servientrega</li>
+                <li><span>💳</span> Es necesario completar el pago antes del envío</li>
+                <li><span>📋</span> Todos los campos son obligatorios</li>
+            </ul>
+        </div>
+        
+        <div class="success-message" id="success-message">
+            ✅ ¡Solicitud enviada correctamente! Te contactaremos pronto.
+        </div>
+        
+        <div class="error-message" id="error-message">
+            ❌ Error al enviar la solicitud. Por favor, intenta nuevamente.
+        </div>
+        
+        <form class="form-container" id="envioForm">
+            <div class="form-group">
+                <label for="nombre">Nombre <span class="required">*</span></label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="apellido">Apellido <span class="required">*</span></label>
+                <input type="text" id="apellido" name="apellido" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="cedula">Cédula <span class="required">*</span></label>
+                <input type="text" id="cedula" name="cedula" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="direccion">Dirección Completa <span class="required">*</span></label>
+                <textarea id="direccion" name="direccion" rows="3" placeholder="Incluye ciudad, barrio, calle, número, referencias..." required></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="telefono">Teléfono <span class="required">*</span></label>
+                <input type="tel" id="telefono" name="telefono" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="producto">Especifica tu Producto <span class="required">*</span></label>
+                <textarea id="producto" name="producto" rows="3" placeholder="Describe detalladamente el producto que deseas (colores, cantidad, referencias, etc.)" required></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="foto">Fotografía del Producto <span class="required">*</span></label>
+                <div class="file-input-wrapper">
+                    <input type="file" id="foto" name="foto" class="file-input" accept="image/*" required>
+                    <label for="foto" class="file-input-label">
+                        📸 Subir Fotografía del Producto
+                    </label>
+                </div>
+            </div>
+            
+            <button type="submit" class="submit-btn" id="submitBtn">
+                Enviar Solicitud de Envío
+            </button>
+        </form>
+        
+        <div class="footer">
+            <p>Gracias por confiar en Uñas de la Monse Productos 💖</p>
+        </div>
+    </div>
+    
+    <script>
+        let selectedMethod = '';
+        
+        // Manejo de selección de método
+        document.querySelectorAll('.integration-option').forEach(option => {
+            option.addEventListener('click', function() {
+                // Remover selección previa
+                document.querySelectorAll('.integration-option').forEach(opt => opt.classList.remove('selected'));
+                document.querySelectorAll('.config-section').forEach(section => section.classList.remove('active'));
+                
+                // Seleccionar nueva opción
+                this.classList.add('selected');
+                selectedMethod = this.dataset.method;
+                document.getElementById(selectedMethod + '-config').classList.add('active');
+            });
+        });
+        
+        // Manejo del archivo
+        document.getElementById('foto').addEventListener('change', function(e) {
+            const label = document.querySelector('.file-input-label');
+            if (e.target.files.length > 0) {
+                label.textContent = `📸 Archivo seleccionado: ${e.target.files[0].name}`;
+                label.style.background = 'linear-gradient(135deg, #28a745, #20c997)';
+            } else {
+                label.textContent = '📸 Subir Fotografía del Producto';
+                label.style.background = 'linear-gradient(135deg, #ff6b9d, #ff8a80)';
+            }
+        });
+        
+        // Manejo del envío del formulario
+        document.getElementById('envioForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            if (!selectedMethod) {
+                alert('Por favor selecciona un método de integración primero');
+                return;
+            }
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const successMsg = document.getElementById('success-message');
+            const errorMsg = document.getElementById('error-message');
+            
+            // Mostrar loading
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="loading"></span>Enviando...';
+            
+            // Recopilar datos
+            const formData = {
+                nombre: document.getElementById('nombre').value,
+                apellido: document.getElementById('apellido').value,
+                cedula: document.getElementById('cedula').value,
+                direccion: document.getElementById('direccion').value,
+                telefono: document.getElementById('telefono').value,
+                producto: document.getElementById('producto').value,
+                foto: document.getElementById('foto').files[0]
+            };
+            
+            try {
+                switch(selectedMethod) {
+                    case 'whatsapp':
+                        await sendToWhatsApp(formData);
+                        break;
+                    case 'email':
+                        await sendToEmail(formData);
+                        break;
+                    case 'googleforms':
+                        await sendToGoogleForms(formData);
+                        break;
+                    case 'telegram':
+                        await sendToTelegram(formData);
+                        break;
+                }
+                
+                successMsg.style.display = 'block';
+                errorMsg.style.display = 'none';
+                this.reset();
+                document.querySelector('.file-input-label').textContent = '📸 Subir Fotografía del Producto';
+                document.querySelector('.file-input-label').style.background = 'linear-gradient(135deg, #ff6b9d, #ff8a80)';
+                
+            } catch (error) {
+                console.error('Error:', error);
+                errorMsg.style.display = 'block';
+                successMsg.style.display = 'none';
+            }
+            
+            // Restaurar botón
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = 'Enviar Solicitud de Envío';
+        });
+        
+        // Funciones de envío
+        async function sendToWhatsApp(data) {
+            const whatsappNumber = document.getElementById('whatsapp-number').value;
+            if (!whatsappNumber) {
+                throw new Error('Configura tu número de WhatsApp');
+            }
+            
+            const message = `🆕 Nueva solicitud de envío - Uñas de la Monse
+
+👤 Cliente: ${data.nombre} ${data.apellido}
+📱 Teléfono: ${data.telefono}
+🆔 Cédula: ${data.cedula}
+📍 Dirección: ${data.direccion}
+🛍️ Producto: ${data.producto}
+
+📸 Foto: ${data.foto ? data.foto.name : 'No adjuntada'}`;
+            
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber.replace(/[^0-9]/g, '')}&text=${encodedMessage}`;
+            
+            // Simular delay
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            window.open(whatsappUrl, '_blank');
+        }
+        
+        async function sendToEmail(data) {
+            const email = document.getElementById('email-service').value;
+            if (!email) {
+                throw new Error('Configura tu email');
+            }
+            
+            // Aquí integrarías con EmailJS u otro servicio
+            // Por ahora simulamos el envío
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            
+            // Código de ejemplo para EmailJS:
+            /*
+            emailjs.send('your_service_id', 'your_template_id', {
+                to_email: email,
+                from_name: data.nombre + ' ' + data.apellido,
+                message: `Cliente: ${data.nombre} ${data.apellido}...`
+            });
+            */
+        }
+        
+        async function sendToGoogleForms(data) {
+            const formsUrl = document.getElementById('forms-url').value;
+            if (!formsUrl) {
+                throw new Error('Configura la URL de tu Google Form');
+            }
+            
+            // Simular envío a Google Forms
+            await new Promise(resolve => setTimeout(resolve, 1500));
+            
+            // En implementación real, harías POST a la URL del formulario
+            console.log('Enviando a Google Forms:', data);
+        }
+        
+        async function sendToTelegram(data) {
+            const token = document.getElementById('telegram-token').value;
+            const chatId = document.getElementById('telegram-chat').value;
+            
+            if (!token || !chatId) {
+                throw new Error('Configura tu bot de Telegram');
+            }
+            
+            const message = `🆕 Nueva solicitud - Uñas de la Monse
+
+👤 ${data.nombre} ${data.apellido}
+📱 ${data.telefono}
+🆔 ${data.cedula}
+📍 ${data.direccion}
+🛍️ ${data.producto}`;
+            
+            const url = `https://api.telegram.org/bot${token}/sendMessage`;
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: message
+                })
+            });
+            
+            if (!response.ok) {
+                throw new Error('Error enviando a Telegram');
+            }
+        }
+        
+        // Función para copiar código de configuración
+        function copyEmailCode() {
+            const code = `// Configuración EmailJS
+emailjs.init("tu_user_id_aqui");
+
+// En tu función de envío:
+emailjs.send("tu_service_id", "tu_template_id", {
+    to_email: "pedidos@unasdelamonse.com",
+    cliente_nombre: data.nombre,
+    cliente_apellido: data.apellido,
+    cliente_telefono: data.telefono,
+    cliente_cedula: data.cedula,
+    cliente_direccion: data.direccion,
+    producto_detalle: data.producto
+});`;
+            
+            navigator.clipboard.writeText(code).then(() => {
+                alert('¡Código copiado al portapapeles!');
+            });
+        }
+    </script>
+</body>
+</html>
